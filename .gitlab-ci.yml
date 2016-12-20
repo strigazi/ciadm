@@ -23,7 +23,9 @@ deploy qa:
   image: gitlab-registry.cern.ch/cloud/ciadm:112
   environment: qa
   script:
+    - docker pull gitlab-registry.cern.ch/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF
     - docker tag gitlab-registry.cern.ch/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF gitlab-registry.cern.ch/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:qa
+    - docker push gitlab-registry.cern.ch/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:qa
   only:
     - qa
   tags:
@@ -34,7 +36,9 @@ deploy production:
   image: gitlab-registry.cern.ch/cloud/ciadm:112
   environment: production
   script:
+    - docker pull gitlab-registry.cern.ch/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF
     - docker tag gitlab-registry.cern.ch/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF gitlab-registry.cern.ch/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest
+    - docker push gitlab-registry.cern.ch/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest
   only:
     - master
   tags:
