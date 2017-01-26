@@ -81,7 +81,7 @@ RUN curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-com
 RUN wget -q https://github.com/kubernetes/kubernetes/releases/download/v1.2.0/kubernetes.tar.gz; \
 	tar zxvf kubernetes.tar.gz; \
 	cp /kubernetes/platforms/linux/amd64/kubectl /usr/bin; \
-	rm -rf /kubernetes
+	rm -rf /kubernetes kubernetes.tar.gz
 
 ENV SHELL=bash
 
