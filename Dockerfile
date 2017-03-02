@@ -47,8 +47,8 @@ priority=1 \n'\
 >> /etc/yum.repos.d/openstackclients7-newton-stable.repo
 
 RUN yum install -y \
-	centos-release-openstack-newton
-RUN sed -i 's/enabled=1/enabled=1\npriority=1/' /etc/yum.repos.d/CentOS-OpenStack-newton.repo
+	centos-release-openstack-ocata
+RUN sed -i 's/enabled=1/enabled=1\npriority=2/' /etc/yum.repos.d/CentOS-OpenStack-ocata.repo
 
 RUN yum install -y \
 	python-barbicanclient \
