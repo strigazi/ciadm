@@ -58,7 +58,8 @@ RUN yum install -y \
 	python-keystoneclient-x509 \
 	python-openstackclient \
 	python-swiftclient \
-	python2-magnumclient
+	python2-magnumclient \
+	python2-manilaclient
 
 # docker client (upstream)
 RUN echo $'\n\
