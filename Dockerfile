@@ -72,8 +72,8 @@ gpgkey=https://yum.dockerproject.org/gpg \n'\
 >> /etc/yum.repos.d/docker.repo
 
 RUN yum install -y \
-	docker-engine-1.10.3 \
-	docker-engine-selinux-1.10.3
+	docker-engine-1.13.1 \
+	docker-engine-selinux-1.13.1
 
 RUN curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose; \
 	chmod +x /usr/local/bin/docker-compose
