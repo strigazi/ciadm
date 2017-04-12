@@ -85,4 +85,4 @@ ENV SHELL=bash
 
 ADD entry.sh /entry.sh
 
-ENTRYPOINT /entry.sh
+CMD /entry.sh

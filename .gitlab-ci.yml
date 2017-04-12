@@ -1,6 +1,7 @@
 stages:
   - build
   - deploy
+  - test
 
 before_script:
   - export DOCKER_API_VERSION=1.21
@@ -12,6 +13,19 @@ deploy branch:
   script:
     - docker build -t gitlab-registry.cern.ch/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF .
     - docker push gitlab-registry.cern.ch/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF
+  except:
+    - master
+    - qa
+  tags:
+    - cci-swarm-builder
+
+test branch:
+  stage: test
+  image: gitlab-registry.cern.ch/cloud/ciadm:112
+  script:
+    - docker run gitlab-registry.cern.ch/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF docker
+    - docker run gitlab-registry.cern.ch/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF docker-compose --help
+    - docker run gitlab-registry.cern.ch/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF kubectl
   except:
     - master
     - qa
