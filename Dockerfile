@@ -75,10 +75,11 @@ RUN yum install -y \
 	docker-engine-1.13.1 \
 	docker-engine-selinux-1.13.1
 
-RUN curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose; \
+RUN curl -L https://github.com/docker/compose/releases/download/1.12.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose; \
 	chmod +x /usr/local/bin/docker-compose
 
-RUN curl -s -LO https://storage.googleapis.com/kubernetes-release/release/1.5.2/bin/linux/amd64/kubectl
+RUN curl -s -LO https://storage.googleapis.com/kubernetes-release/release/1.5.6/bin/`uname -s`/`uname -m`/kubectl > /usr/local/bin/kubectl; \
+	chmod +x /usr/local/bin/kubectl
 
 ENV SHELL=bash
 
