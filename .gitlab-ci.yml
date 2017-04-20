@@ -4,12 +4,13 @@ stages:
   - test
 
 before_script:
-  - export DOCKER_API_VERSION=1.21
+  - ls /var/run -l
+  - ls -l /run
   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN gitlab-registry.cern.ch
 
 deploy branch:
   stage: deploy
-  image: gitlab-registry.cern.ch/cloud/ciadm:112
+  image: gitlab-registry.cern.ch/cloud/ciadm:qa
   script:
     - docker build -t gitlab-registry.cern.ch/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF .
     - docker push gitlab-registry.cern.ch/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF
@@ -21,7 +22,7 @@ deploy branch:
 
 test branch:
   stage: test
-  image: gitlab-registry.cern.ch/cloud/ciadm:112
+  image: gitlab-registry.cern.ch/cloud/ciadm:qa
   script:
     - docker run gitlab-registry.cern.ch/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF docker
     - docker run gitlab-registry.cern.ch/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF docker-compose --help
@@ -34,7 +35,7 @@ test branch:
 
 deploy qa:
   stage: deploy
-  image: gitlab-registry.cern.ch/cloud/ciadm:112
+  image: gitlab-registry.cern.ch/cloud/ciadm:qa
   environment: qa
   script:
     - docker pull gitlab-registry.cern.ch/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF
@@ -47,7 +48,7 @@ deploy qa:
 
 deploy production:
   stage: deploy
-  image: gitlab-registry.cern.ch/cloud/ciadm:112
+  image: gitlab-registry.cern.ch/cloud/ciadm:qa
   environment: production
   script:
     - docker pull gitlab-registry.cern.ch/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF
