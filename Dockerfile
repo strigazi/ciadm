@@ -4,7 +4,7 @@ MAINTAINER Bertrand NOEL <bertrand.noel@cern.ch>, Ricardo Rocha <ricardo.rocha@c
 
 # cern base dependencies
 ADD http://linux.web.cern.ch/linux/centos7/CentOS-CERN.repo /etc/yum.repos.d/CentOS-CERN.repo
-RUN /usr/bin/rpm --import http://linuxsoft.cern.ch/cern/centos/7.1/os/x86_64/RPM-GPG-KEY-cern
+RUN /usr/bin/rpm --import http://linuxsoft.cern.ch/cern/centos/7.3/os/x86_64/RPM-GPG-KEY-cern
 
 # nice to have utilities
 RUN yum install -y \
@@ -26,8 +26,10 @@ RUN yum -y install \
 ADD krb5.conf /etc/krb5.conf
 
 # rpm/koji rpms and setup
+RUN yum install -y --disablerepo=extras \
+	koji
+
 RUN yum install -y \
-	koji \
 	rpm-build \
 	rpmdevtools
 
@@ -40,19 +42,19 @@ RUN rpmdev-setuptree
 RUN echo $'\n\
 [cci7-openstack-clients-stable] \n\
 name=CERN rebuilds for OpenStack clients - QA \n\
-baseurl=http://linuxsoft.cern.ch/internal/repos/openstackclients7-newton-stable/x86_64/os/ \n\
+baseurl=http://linuxsoft.cern.ch/internal/repos/openstackclients7-pike-stable/x86_64/os/ \n\
 enabled=1 \n\
 gpgcheck=0 \n\
 priority=1 \n'\
->> /etc/yum.repos.d/openstackclients7-newton-stable.repo
+>> /etc/yum.repos.d/openstackclients7-pike-stable.repo
 
 RUN yum install -y \
-	centos-release-openstack-newton
-RUN sed -i 's/enabled=1/enabled=1\npriority=1/' /etc/yum.repos.d/CentOS-OpenStack-newton.repo
+	centos-release-openstack-pike
+RUN sed -i 's/enabled=1/enabled=1\npriority=1/' /etc/yum.repos.d/CentOS-OpenStack-pike.repo
 
 RUN yum install -y \
 	python-barbicanclient \
-	python-cryptography \
+	python2-cryptography \
 	python-decorator \
 	python-heatclient \
 	python-keystoneclient-x509 \
