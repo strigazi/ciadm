@@ -80,7 +80,7 @@ RUN yum install -y \
 RUN curl -L https://github.com/docker/compose/releases/download/1.12.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose; \
 	chmod +x /usr/local/bin/docker-compose
 
-RUN curl -L https://storage.googleapis.com/kubernetes-release/release/v1.5.6/bin/linux/amd64/kubectl > /usr/local/bin/kubectl; \
+RUN curl -L https://storage.googleapis.com/kubernetes-release/release/v1.7.6/bin/linux/amd64/kubectl > /usr/local/bin/kubectl; \
 	chmod +x /usr/local/bin/kubectl
 
 ENV SHELL=bash
