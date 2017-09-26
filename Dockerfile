@@ -65,19 +65,18 @@ RUN yum install -y \
 
 # docker client (upstream)
 RUN echo $'\n\
-[dockerrepo] \n\
-name=Docker Repository \n\
-baseurl=https://yum.dockerproject.org/repo/main/centos/$releasever/ \n\
+[docker-ce-stable] \n\
+name=Docker CE Stable - $basearch \n\
+baseurl=https://download.docker.com/linux/centos/7/$basearch/stable \n\
 enabled=1 \n\
-gpgcheck=1 \n\
-gpgkey=https://yum.dockerproject.org/gpg \n'\
+gpgcheck=0 \n\
+gpgkey=https://download.docker.com/linux/centos/gpg \n'\
 >> /etc/yum.repos.d/docker.repo
 
 RUN yum install -y \
-	docker-engine-1.13.1 \
-	docker-engine-selinux-1.13.1
+	docker-ce-17.06.1.ce
 
-RUN curl -L https://github.com/docker/compose/releases/download/1.12.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose; \
+RUN curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose; \
 	chmod +x /usr/local/bin/docker-compose
 
 RUN curl -L https://storage.googleapis.com/kubernetes-release/release/v1.7.6/bin/linux/amd64/kubectl > /usr/local/bin/kubectl; \
