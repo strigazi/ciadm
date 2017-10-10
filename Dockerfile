@@ -61,7 +61,9 @@ RUN yum install -y \
 	python-openstackclient \
 	python-swiftclient \
 	python2-magnumclient \
-	python2-manilaclient
+	python2-manilaclient \
+	python2-ironicclient \
+	python-ironic-inspector-client
 
 # docker client (upstream)
 RUN echo $'\n\
