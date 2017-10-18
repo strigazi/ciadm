@@ -42,19 +42,19 @@ RUN rpmdev-setuptree
 RUN echo $'\n\
 [cci7-openstack-clients-stable] \n\
 name=CERN rebuilds for OpenStack clients - QA \n\
-baseurl=http://linuxsoft.cern.ch/internal/repos/openstackclients7-pike-stable/x86_64/os/ \n\
+baseurl=http://linuxsoft.cern.ch/internal/repos/openstackclients7-newton-stable/x86_64/os/ \n\
 enabled=1 \n\
 gpgcheck=0 \n\
 priority=1 \n'\
->> /etc/yum.repos.d/openstackclients7-pike-stable.repo
+>> /etc/yum.repos.d/openstackclients7-newton-stable.repo
 
 RUN yum install -y \
-	centos-release-openstack-pike
-RUN sed -i 's/enabled=1/enabled=1\npriority=1/' /etc/yum.repos.d/CentOS-OpenStack-pike.repo
+	centos-release-openstack-newton
+RUN sed -i 's/enabled=1/enabled=1\npriority=1/' /etc/yum.repos.d/CentOS-OpenStack-newton.repo
 
 RUN yum install -y \
 	python-barbicanclient \
-	python2-cryptography \
+	python-cryptography \
 	python-decorator \
 	python-heatclient \
 	python-keystoneclient-x509 \
