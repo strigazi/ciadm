@@ -9,6 +9,7 @@ RUN /usr/bin/rpm --import http://linuxsoft.cern.ch/cern/centos/7.3/os/x86_64/RPM
 # nice to have utilities
 RUN yum install -y \
 	ca-certificates \
+        git \
 	man-pages \
 	vim \
 	wget \
