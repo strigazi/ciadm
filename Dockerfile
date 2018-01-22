@@ -63,7 +63,8 @@ RUN yum install -y \
 	python2-magnumclient \
 	python2-manilaclient \
 	python2-ironicclient \
-	python-ironic-inspector-client
+	python-ironic-inspector-client \
+	python2-mistralclient
 
 # docker client (upstream)
 RUN echo $'\n\
