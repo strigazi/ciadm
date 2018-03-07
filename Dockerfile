@@ -43,15 +43,20 @@ RUN rpmdev-setuptree
 RUN echo $'\n\
 [cci7-openstack-clients-stable] \n\
 name=CERN rebuilds for OpenStack clients - QA \n\
-baseurl=http://linuxsoft.cern.ch/internal/repos/openstackclients7-pike-stable/x86_64/os/ \n\
+baseurl=http://linuxsoft.cern.ch/internal/repos/openstackclients7-queens-stable/x86_64/os/ \n\
 enabled=1 \n\
 gpgcheck=0 \n\
 priority=1 \n'\
->> /etc/yum.repos.d/openstackclients7-pike-stable.repo
+>> /etc/yum.repos.d/openstackclients7-queens-stable.repo
 
-RUN yum install -y \
-	centos-release-openstack-pike
-RUN sed -i 's/enabled=1/enabled=1\npriority=1/' /etc/yum.repos.d/CentOS-OpenStack-pike.repo
+RUN echo $'\n\
+[centos7-cloud-openstack-queens] \n\
+name=Openstack RDO \n\
+baseurl=http://linuxsoft.cern.ch/cern/centos/7/cloud/x86_64/openstack-queens \n\
+enabled=1 \n\
+priority=1 \n\
+gpgcheck=0 \n'\
+>> /etc/yum.repos.d/centos7-cloud-openstack-queens.repo
 
 RUN yum install -y \
 	python-barbicanclient \
@@ -66,6 +71,8 @@ RUN yum install -y \
 	python2-ironicclient \
 	python-ironic-inspector-client \
 	python2-mistralclient
+
+RUN yum localinstall -y http://cbs.centos.org/kojifiles/packages/python-magnumclient/2.9.0/1.el7/noarch/python2-magnumclient-2.9.0-1.el7.noarch.rpm
 
 # docker client (upstream)
 RUN echo $'\n\
