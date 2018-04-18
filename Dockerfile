@@ -60,16 +60,16 @@ gpgcheck=0 \n'\
 
 RUN yum install -y \
 	python-barbicanclient \
-	python2-cryptography \
 	python-decorator \
 	python-heatclient \
+	python-ironic-inspector-client \
 	python-keystoneclient-x509 \
 	python-openstackclient \
 	python-swiftclient \
+	python2-cryptography \
+	python2-ironicclient \
 	python2-magnumclient \
 	python2-manilaclient \
-	python2-ironicclient \
-	python-ironic-inspector-client \
 	python2-mistralclient
 
 RUN yum localinstall -y http://cbs.centos.org/kojifiles/packages/python-magnumclient/2.9.0/1.el7/noarch/python2-magnumclient-2.9.0-1.el7.noarch.rpm
