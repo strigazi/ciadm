@@ -93,6 +93,9 @@ RUN curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-co
 RUN curl -L https://storage.googleapis.com/kubernetes-release/release/v1.9.3/bin/linux/amd64/kubectl > /usr/local/bin/kubectl; \
 	chmod +x /usr/local/bin/kubectl
 
+RUN curl -o helm.tar.gz https://kubernetes-helm.storage.googleapis.com/helm-v2.8.2-linux-amd64.tar.gz; \
+    mkdir -p helm; tar zxvf helm.tar.gz -C helm; cp helm/linux-amd64/helm /usr/local/bin; rm -rf helm*
+
 ENV SHELL=bash
 
 ADD entry.sh /entry.sh
